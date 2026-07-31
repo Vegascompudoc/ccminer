@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="LoonAI — University of Minnesota-administered AI tools powering AI for research, teaching, learning, and administration." />
+  <meta property="og:title" content="LoonAI | University of Minnesota" />
+  <meta property="og:description" content="University of Minnesota-administered tools powering AI for research, teaching, learning, and administration." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://loonai.umn.edu/" />
+  <title>LoonAI | University of Minnesota</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Open+Sans:wght@300;400;500;600;700&family=Source+Code+Pro:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── UMN TOKENS ── */
+    :root {
+      --maroon:     #7A0019;
+      --maroon2:    #5B0013;
+      --gold:       #FFCD00;
+      --gold2:      #FFB81C;
+      --dark:       #1A1A1A;
+      --dark2:      #2D2D2D;
+      --bg:         #FFFFFF;
+      --bg2:        #F7F5F2;
+      --bg3:        #EEE9E2;
+      --ink:        #1A1A1A;
+      --ink-mid:    #3D3D3D;
+      --ink-soft:   #666666;
+      --line:       #D9D4CC;
+      --line2:      #EAE5DE;
+      --blue-link:  #006494;
+      --teal:       #007B8A;
+      --serif:      'Crimson Pro', Georgia, serif;
+      --sans:       'Open Sans', system-ui, sans-serif;
+      --mono:       'Source Code Pro', monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.65;
+    }
+    a { color: var(--blue-link); text-decoration: none; transition: color .18s; }
+    a:hover { color: var(--maroon); text-decoration: underline; }
+    img { display: block; max-width: 100%; }
+
+    /* ── SKIP ── */
+    .skip { position: absolute; top: -60px; left: 1rem; background: var(--maroon); color: #fff; padding: .4rem 1rem; border-radius: 2px; font-size: .8rem; z-index: 9999; }
+    .skip:focus { top: .5rem; }
+
+    /* ── UMN TOP BAR ── */
+    .umn-bar {
+      background: var(--maroon);
+      padding: .45rem 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .umn-bar-brand {
+      display: flex; align-items: center; gap: .75rem;
+    }
+    .umn-block-m {
+      width: 28px; height: 28px; flex-shrink: 0;
+    }
+    /* SVG Block M */
+    .umn-wordmark {
+      font-family: var(--sans); font-size: .78rem; font-weight: 700;
+      color: rgba(255,255,255,.9); letter-spacing: .04em;
+      line-height: 1.2;
+    }
+    .umn-wordmark span { display: block; font-weight: 300; font-size: .68rem; opacity: .75; }
+    .umn-bar-links { display: flex; gap: 1.4rem; }
+    .umn-bar-links a { font-size: .7rem; color: rgba(255,255,255,.6); letter-spacing: .04em; transition: color .15s; }
+    .umn-bar-links a:hover { color: var(--gold); text-decoration: none; }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--bg);
+      border-bottom: 1px solid var(--line);
+      position: sticky; top: 0; z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,.06);
+    }
+    .nav-inner {
+      max-width: 1200px; margin: 0 auto; padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+    }
+    .nav-brand { display: flex; align-items: center; gap: .9rem; }
+
+    /* Loon bird logo block */
+    .loon-mark {
+      width: 44px; height: 44px; border-radius: 4px;
+      background: var(--maroon);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; flex-shrink: 0;
+    }
+    .nav-brand-text {}
+    .nav-brand-name {
+      font-family: var(--serif); font-size: 1.3rem; font-weight: 600;
+      color: var(--maroon); line-height: 1.1; letter-spacing: -.01em;
+    }
+    .nav-brand-sub {
+      font-family: var(--mono); font-size: .58rem; color: var(--ink-soft);
+      letter-spacing: .1em; text-transform: uppercase;
+    }
+    .nav-sep { width: 1px; height: 28px; background: var(--line); }
+
+    .nav-links { display: flex; list-style: none; }
+    .nav-links a {
+      font-size: .82rem; font-weight: 500; color: var(--ink-mid);
+      padding: .5rem 1rem; border-bottom: 3px solid transparent;
+      transition: color .15s, border-color .15s; display: block;
+    }
+    .nav-links a:hover { color: var(--maroon); border-bottom-color: var(--maroon); text-decoration: none; }
+
+    .nav-cta {
+      font-size: .8rem !important; font-weight: 600 !important;
+      background: var(--gold) !important; color: var(--dark) !important;
+      border-radius: 3px !important; border-bottom: none !important;
+      padding: .48rem 1.2rem !important; transition: background .15s !important;
+      letter-spacing: .02em;
+    }
+    .nav-cta:hover { background: var(--gold2) !important; color: var(--dark) !important; text-decoration: none !important; }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--maroon);
+      position: relative; overflow: hidden; padding: 5.5rem 2rem 5rem;
+    }
+    /* grid pattern */
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+      background-size: 44px 44px;
+    }
+    /* gold glow */
+    .hero::after {
+      content: '';
+      position: absolute; bottom: -80px; right: -80px;
+      width: 480px; height: 380px;
+      background: radial-gradient(ellipse, rgba(255,205,0,.1) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      max-width: 1200px; margin: 0 auto; position: relative; z-index: 1;
+      display: grid; grid-template-columns: 1fr 400px; gap: 4rem; align-items: center;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--mono); font-size: .65rem; letter-spacing: .2em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 1.2rem; display: flex; align-items: center; gap: .65rem;
+      opacity: 0; animation: rise .5s ease .1s forwards;
+    }
+    .hero-eyebrow::before { content: ''; width: 20px; height: 1px; background: var(--gold); }
+
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 300; color: #fff;
+      line-height: 1.1; letter-spacing: -.02em; margin-bottom: .9rem;
+      opacity: 0; animation: rise .7s ease .2s forwards;
+    }
+    .hero h1 strong { font-weight: 700; }
+    .hero h1 em { font-style: italic; color: var(--gold); }
+
+    .hero-desc {
+      font-size: 1rem; font-weight: 300; color: rgba(255,255,255,.68);
+      line-height: 1.8; max-width: 520px; margin-bottom: 2.2rem;
+      opacity: 0; animation: rise .7s ease .35s forwards;
+    }
+
+    .hero-btns {
+      display: flex; gap: .75rem; flex-wrap: wrap;
+      opacity: 0; animation: rise .7s ease .5s forwards;
+    }
+    .btn {
+      font-family: var(--sans); font-size: .82rem; font-weight: 600;
+      padding: .75rem 1.8rem; border-radius: 3px; cursor: pointer;
+      display: inline-flex; align-items: center; gap: .45rem;
+      transition: all .18s; letter-spacing: .01em;
+    }
+    .btn-gold   { background: var(--gold); color: var(--dark); border: none; }
+    .btn-gold:hover { background: var(--gold2); color: var(--dark); text-decoration: none; }
+    .btn-ghost  { background: transparent; color: rgba(255,255,255,.78); border: 2px solid rgba(255,255,255,.3); }
+    .btn-ghost:hover { background: rgba(255,255,255,.08); color: #fff; border-color: rgba(255,255,255,.6); text-decoration: none; }
+
+    @keyframes rise { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
+
+    /* hero card */
+    .hero-card {
+      background: rgba(255,255,255,.08); backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,.18); border-radius: 6px; padding: 1.6rem;
+      opacity: 0; animation: rise .8s ease .4s forwards;
+    }
+    .hc-head { font-family: var(--mono); font-size: .6rem; letter-spacing: .15em; text-transform: uppercase; color: rgba(255,255,255,.45); margin-bottom: 1.1rem; }
+    .hc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; margin-bottom: 1rem; }
+    .hc-stat { background: rgba(0,0,0,.2); border-radius: 4px; padding: .9rem; text-align: center; }
+    .hc-val  { font-family: var(--serif); font-size: 2rem; font-weight: 700; color: var(--gold); line-height: 1; }
+    .hc-lbl  { font-family: var(--mono); font-size: .56rem; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.4); margin-top: .2rem; }
+    .hc-badge {
+      background: rgba(255,205,0,.15); border: 1px solid rgba(255,205,0,.3);
+      border-radius: 4px; padding: .8rem 1rem;
+      display: flex; align-items: center; gap: .75rem;
+    }
+    .hc-badge-icon { font-size: 1.3rem; flex-shrink: 0; }
+    .hc-badge-text { font-size: .82rem; color: rgba(255,255,255,.78); line-height: 1.45; }
+    .hc-badge-text strong { color: var(--gold); }
+
+    /* ── STATS BAR ── */
+    .stats-bar { background: var(--bg2); border-bottom: 1px solid var(--line); }
+    .stats-inner {
+      max-width: 1200px; margin: 0 auto; padding: 0 2rem;
+      display: grid; grid-template-columns: repeat(4,1fr);
+    }
+    .st { padding: 1.3rem 1rem; border-right: 1px solid var(--line); text-align: center; }
+    .st:last-child { border-right: none; }
+    .st-val { font-family: var(--serif); font-size: 2.1rem; font-weight: 700; color: var(--maroon); line-height: 1; }
+    .st-lbl { font-family: var(--mono); font-size: .58rem; letter-spacing: .13em; text-transform: uppercase; color: var(--ink-soft); margin-top: .2rem; }
+
+    /* ── MAIN ── */
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 4rem 2rem 5rem; }
+    .sec-hd { display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; }
+    .sh-txt  { font-family: var(--mono); font-size: .62rem; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-soft); white-space: nowrap; }
+    .sh-line { flex: 1; height: 1px; background: var(--line); }
+
+    /* ── GATEWAY SPOTLIGHT ── */
+    .gateway-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 4rem;
+    }
+    .gateway-card {
+      background: var(--bg2); border: 1px solid var(--line); border-radius: 4px;
+      padding: 2rem; display: flex; flex-direction: column; gap: .8rem;
+      transition: box-shadow .2s, transform .2s;
+      position: relative; overflow: hidden;
+    }
+    .gateway-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 4px;
+      background: var(--maroon); transform: scaleX(0); transform-origin: left;
+      transition: transform .3s;
+    }
+    .gateway-card:hover { box-shadow: 0 8px 32px rgba(122,0,25,.1); transform: translateY(-2px); }
+    .gateway-card:hover::before { transform: scaleX(1); }
+    .gateway-card:nth-child(2)::before { background: var(--gold); }
+    .gateway-card:nth-child(3)::before { background: var(--teal); }
+    .gateway-card:nth-child(4)::before { background: var(--dark2); }
+
+    .gc-icon { font-size: 2rem; }
+    .gc-title { font-family: var(--serif); font-size: 1.2rem; font-weight: 600; color: var(--ink); line-height: 1.25; }
+    .gc-desc  { font-size: .88rem; color: var(--ink-mid); line-height: 1.7; flex: 1; }
+    .gc-link  { font-family: var(--mono); font-size: .65rem; color: var(--maroon); letter-spacing: .06em; display: flex; align-items: center; gap: .35rem; }
+    .gc-link:hover { color: var(--maroon2); text-decoration: none; }
+    .gc-arr { transition: transform .2s; }
+    .gateway-card:hover .gc-arr { transform: translateX(4px); }
+
+    /* ── ABOUT + SIDEBAR ── */
+    .two-col { display: grid; grid-template-columns: 1fr 320px; gap: 2.5rem; margin-bottom: 4rem; }
+
+    .about-section h2 {
+      font-family: var(--serif); font-size: clamp(1.6rem, 3vw, 2.3rem);
+      font-weight: 600; color: var(--ink); line-height: 1.2;
+      margin-bottom: 1.1rem; letter-spacing: -.01em;
+    }
+    .about-section p {
+      font-size: .95rem; color: var(--ink-mid); line-height: 1.8; margin-bottom: 1rem;
+    }
+    .about-section p:last-child { margin-bottom: 0; }
+
+    /* ── SIDEBAR ── */
+    .sidebar { display: flex; flex-direction: column; gap: 1.2rem; }
+    .s-box { background: var(--bg2); border: 1px solid var(--line); border-radius: 4px; overflow: hidden; }
+    .s-head {
+      background: var(--maroon); padding: .65rem 1.1rem;
+      font-family: var(--mono); font-size: .6rem; letter-spacing: .16em;
+      text-transform: uppercase; color: rgba(255,255,255,.8);
+    }
+    .s-head.gold { background: var(--gold); color: var(--dark); }
+    .s-body { padding: .9rem 1.1rem; }
+
+    .news-list { display: flex; flex-direction: column; }
+    .news-item { padding: .7rem 0; border-bottom: 1px solid var(--line2); }
+    .news-item:last-child { border-bottom: none; }
+    .news-date { font-family: var(--mono); font-size: .62rem; color: var(--maroon); margin-bottom: .15rem; }
+    .news-title { font-size: .83rem; font-weight: 500; color: var(--ink); line-height: 1.4; }
+    .news-title a { color: inherit; }
+    .news-title a:hover { color: var(--maroon); }
+
+    .quick-links { display: flex; flex-direction: column; }
+    .ql { display: flex; align-items: center; justify-content: space-between; padding: .6rem 0; border-bottom: 1px solid var(--line2); font-size: .82rem; color: var(--ink-mid); transition: color .15s; }
+    .ql:last-child { border-bottom: none; }
+    .ql:hover { color: var(--maroon); text-decoration: none; }
+    .ql-l { display: flex; align-items: center; gap: .5rem; }
+    .ql-icon { font-size: .85rem; }
+    .ql-arr { font-size: .7rem; color: var(--line); transition: all .15s; }
+    .ql:hover .ql-arr { color: var(--maroon); transform: translateX(3px); }
+
+    /* ── TOOLS SECTION ── */
+    .tools-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.2rem; margin-bottom: 4rem; }
+    .tool-card {
+      background: var(--bg); border: 1px solid var(--line); border-radius: 4px;
+      padding: 1.5rem; transition: box-shadow .2s; cursor: pointer;
+    }
+    .tool-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,.08); }
+    .tool-icon { font-size: 1.5rem; margin-bottom: .8rem; }
+    .tool-name { font-weight: 700; font-size: .9rem; color: var(--ink); margin-bottom: .3rem; }
+    .tool-desc { font-size: .8rem; color: var(--ink-soft); line-height: 1.6; margin-bottom: .8rem; }
+    .tool-tag {
+      font-family: var(--mono); font-size: .58rem; letter-spacing: .1em;
+      text-transform: uppercase; padding: .18rem .5rem; border-radius: 2px;
+      border: 1px solid var(--line); color: var(--ink-soft);
+    }
+    .tool-tag.active { border-color: rgba(122,0,25,.25); color: var(--maroon); background: rgba(122,0,25,.05); }
+
+    /* ── CTA BANNER ── */
+    .cta-banner {
+      background: var(--bg3); border: 1px solid var(--line);
+      border-left: 5px solid var(--maroon); border-radius: 3px;
+      padding: 2.5rem 2.5rem;
+      display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: center;
+      margin-bottom: 4rem;
+    }
+    .cta-text h2 {
+      font-family: var(--serif); font-size: clamp(1.3rem, 2.5vw, 1.9rem);
+      font-weight: 600; color: var(--maroon); line-height: 1.2; margin-bottom: .5rem;
+    }
+    .cta-text p { font-size: .9rem; color: var(--ink-mid); line-height: 1.65; }
+    .cta-btns  { display: flex; flex-direction: column; gap: .7rem; }
+    .btn-maroon { background: var(--maroon); color: #fff; border: none; }
+    .btn-maroon:hover { background: var(--maroon2); color: #fff; text-decoration: none; }
+    .btn-outline { background: transparent; color: var(--maroon); border: 2px solid var(--maroon); }
+    .btn-outline:hover { background: var(--maroon); color: #fff; text-decoration: none; }
+
+    /* ── FOOTER ── */
+    footer { background: var(--maroon); border-top: 4px solid var(--gold); padding: 3rem 2rem 1.5rem; }
+    .footer-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2.5rem; margin-bottom: 2rem;
+    }
+    .f-brand-name { font-family: var(--serif); font-size: 1.1rem; font-weight: 600; color: #fff; margin-bottom: .5rem; }
+    .f-brand p    { font-size: .82rem; color: rgba(255,255,255,.5); line-height: 1.65; max-width: 240px; }
+    .f-brand-sub  { font-family: var(--mono); font-size: .65rem; color: var(--gold); letter-spacing: .08em; text-transform: uppercase; margin-top: .75rem; }
+    .f-col h4 { font-family: var(--mono); font-size: .6rem; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.4); margin-bottom: .85rem; }
+    .f-col ul { list-style: none; }
+    .f-col li { margin-bottom: .45rem; }
+    .f-col a  { font-size: .82rem; color: rgba(255,255,255,.55); transition: color .15s; }
+    .f-col a:hover { color: var(--gold); text-decoration: none; }
+    .footer-bottom {
+      max-width: 1200px; margin: 0 auto; padding-top: 1.3rem;
+      border-top: 1px solid rgba(255,255,255,.12);
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: .5rem;
+    }
+    .footer-bottom p { font-family: var(--mono); font-size: .62rem; color: rgba(255,255,255,.3); }
+    .footer-bottom a { color: rgba(255,255,255,.3); }
+    .footer-bottom a:hover { color: var(--gold); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .hero-inner   { grid-template-columns: 1fr; }
+      .hero-card    { max-width: 460px; }
+      .gateway-grid { grid-template-columns: 1fr 1fr; }
+      .two-col      { grid-template-columns: 1fr; }
+      .tools-grid   { grid-template-columns: 1fr 1fr; }
+      .stats-inner  { grid-template-columns: repeat(2,1fr); }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      .umn-bar-links, .nav-links { display: none; }
+      .hero { padding: 3.5rem 1.2rem 3rem; }
+      .wrap { padding: 2.5rem 1.2rem 3rem; }
+      .gateway-grid { grid-template-columns: 1fr; }
+      .tools-grid   { grid-template-columns: 1fr; }
+      .cta-banner   { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr; gap: 1.5rem; }
+      .stats-inner  { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<a href="#main" class="skip">Skip to content</a>
+
+<!-- UMN TOP BAR -->
+<div class="umn-bar">
+  <div class="umn-bar-brand">
+    <svg class="umn-block-m" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100" height="100" fill="#FFCD00"/>
+      <path d="M10 85 L10 15 L30 15 L50 55 L70 15 L90 15 L90 85 L75 85 L75 35 L55 75 L45 75 L25 35 L25 85 Z" fill="#7A0019"/>
+    </svg>
+    <div class="umn-wordmark">
+      University of Minnesota
+      <span>Twin Cities</span>
+    </div>
+  </div>
+  <div class="umn-bar-links">
+    <a href="https://ai.umn.edu">AI Hub</a>
+    <a href="https://www.umn.edu">umn.edu</a>
+    <a href="https://it.umn.edu">IT</a>
+    <a href="https://oit.umn.edu">OIT</a>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-brand">
+      <div class="loon-mark">🦢</div>
+      <div class="nav-brand-text">
+        <div class="nav-brand-name">LoonAI</div>
+        <div class="nav-brand-sub">University of Minnesota</div>
+      </div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#gateway">Gateway</a></li>
+      <li><a href="#tools">Tools</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="https://ai.umn.edu">AI Hub</a></li>
+      <li><a href="https://loonai.umn.edu/docs" class="nav-cta">Documentation</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow">University of Minnesota · AI Platform</div>
+      <h1>
+        AI tools for<br />
+        <strong>every Gopher.</strong><br />
+        <em>Powered by LoonAI.</em>
+      </h1>
+      <p class="hero-desc">
+        LoonAI is the umbrella for University of Minnesota-administered tools
+        powering AI for research, teaching, learning, and administration.
+        Secure, responsible, and built for the UMN community.
+      </p>
+      <div class="hero-btns">
+        <a href="#gateway" class="btn btn-gold">Explore the Gateway</a>
+        <a href="https://loonai.umn.edu/docs" class="btn btn-ghost">Read the Docs →</a>
+      </div>
+    </div>
+
+    <div class="hero-card">
+      <div class="hc-head">LoonAI — quick facts</div>
+      <div class="hc-grid">
+        <div class="hc-stat">
+          <div class="hc-val">1</div>
+          <div class="hc-lbl">Unified Platform</div>
+        </div>
+        <div class="hc-stat">
+          <div class="hc-val">4</div>
+          <div class="hc-lbl">Use Areas</div>
+        </div>
+        <div class="hc-stat">
+          <div class="hc-val">UMN</div>
+          <div class="hc-lbl">Administered</div>
+        </div>
+        <div class="hc-stat">
+          <div class="hc-val">Free</div>
+          <div class="hc-lbl">For UMN Users</div>
+        </div>
+      </div>
+      <div class="hc-badge">
+        <div class="hc-badge-icon">🔒</div>
+        <div class="hc-badge-text">
+          <strong>Secure & Responsible AI.</strong>
+          All LoonAI tools are administered by the University and comply with UMN data governance policies.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="st"><div class="st-val">70k+</div><div class="st-lbl">UMN Students</div></div>
+    <div class="st"><div class="st-val">24k+</div><div class="st-lbl">Faculty & Staff</div></div>
+    <div class="st"><div class="st-val">4</div><div class="st-lbl">Use Areas</div></div>
+    <div class="st"><div class="st-val">1</div><div class="st-lbl">Unified Gateway</div></div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="wrap" id="main">
+
+  <!-- GATEWAY SECTION -->
+  <div class="sec-hd" id="gateway">
+    <span class="sh-txt">LoonAI Gateway</span>
+    <span class="sh-line"></span>
+  </div>
+
+  <div class="gateway-grid">
+    <div class="gateway-card">
+      <div class="gc-icon">🔬</div>
+      <div class="gc-title">AI for Research</div>
+      <div class="gc-desc">Powerful AI tools to accelerate discovery — literature review, data analysis, hypothesis generation, and research writing assistance for UMN investigators.</div>
+      <a href="https://loonai.umn.edu/gateway/research" class="gc-link">Access tools <span class="gc-arr">→</span></a>
+    </div>
+    <div class="gateway-card">
+      <div class="gc-icon">🎓</div>
+      <div class="gc-title">AI for Teaching</div>
+      <div class="gc-desc">Course design, syllabus generation, assessment creation, and pedagogical AI tools to help UMN educators build more effective, engaging learning experiences.</div>
+      <a href="https://loonai.umn.edu/gateway/teaching" class="gc-link">Access tools <span class="gc-arr">→</span></a>
+    </div>
+    <div class="gateway-card">
+      <div class="gc-icon">📚</div>
+      <div class="gc-title">AI for Learning</div>
+      <div class="gc-desc">Personalized study support, writing feedback, concept explanation, and tutoring assistance — AI tools designed to help students succeed at the U of M.</div>
+      <a href="https://loonai.umn.edu/gateway/learning" class="gc-link">Access tools <span class="gc-arr">→</span></a>
+    </div>
+    <div class="gateway-card">
+      <div class="gc-icon">⚙️</div>
+      <div class="gc-title">AI for Administration</div>
+      <div class="gc-desc">Workflow automation, document drafting, policy analysis, and administrative AI tools to improve efficiency across UMN departments and units.</div>
+      <a href="https://loonai.umn.edu/gateway/admin" class="gc-link">Access tools <span class="gc-arr">→</span></a>
+    </div>
+  </div>
+
+  <!-- TOOLS -->
+  <div class="sec-hd" id="tools">
+    <span class="sh-txt">Available tools</span>
+    <span class="sh-line"></span>
+  </div>
+  <div class="tools-grid">
+    <div class="tool-card">
+      <div class="tool-icon">💬</div>
+      <div class="tool-name">LoonAI Chat</div>
+      <div class="tool-desc">Secure AI chat powered by leading LLMs — available to all UMN students, faculty, and staff. Data stays within UMN-governed infrastructure.</div>
+      <span class="tool-tag active">Available now</span>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon">📄</div>
+      <div class="tool-name">Document Assistant</div>
+      <div class="tool-desc">Upload and query documents, summarize reports, extract key information from research papers and administrative files securely.</div>
+      <span class="tool-tag active">Available now</span>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon">✍️</div>
+      <div class="tool-name">Writing Support</div>
+      <div class="tool-desc">AI-powered writing feedback, grammar, clarity, and style suggestions tailored for academic and professional writing contexts.</div>
+      <span class="tool-tag active">Available now</span>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon">📊</div>
+      <div class="tool-name">Data Analysis Helper</div>
+      <div class="tool-desc">Natural-language data exploration, visualization suggestions, and statistical analysis support for researchers and analysts across UMN.</div>
+      <span class="tool-tag">Coming soon</span>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon">🤖</div>
+      <div class="tool-name">Automated Workflows</div>
+      <div class="tool-desc">Build AI-powered automation for repetitive administrative tasks — form processing, email triage, scheduling, and more.</div>
+      <span class="tool-tag">Coming soon</span>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon">🔗</div>
+      <div class="tool-name">API Access</div>
+      <div class="tool-desc">Developer-level API access to LoonAI models for UMN researchers and IT teams building custom AI-powered applications and integrations.</div>
+      <span class="tool-tag">Beta</span>
+    </div>
+  </div>
+
+  <!-- ABOUT + SIDEBAR -->
+  <div class="two-col" id="about">
+    <div class="about-section">
+      <h2>What is LoonAI?</h2>
+      <p>
+        LoonAI is the University of Minnesota's umbrella platform for institutionally
+        administered AI tools. Named for Minnesota's iconic common loon, LoonAI brings
+        together a growing suite of AI-powered tools designed specifically for the UMN
+        community — students, faculty, staff, and researchers.
+      </p>
+      <p>
+        The first project documented in depth under LoonAI is the <strong>LoonAI Gateway</strong>
+        — a unified access point for AI tools organized across four key use areas:
+        research, teaching, learning, and administration.
+      </p>
+      <p>
+        All LoonAI tools are administered by the University of Minnesota and operate
+        within UMN's data governance and responsible AI frameworks. For broader
+        university AI strategy and resources, visit the
+        <a href="https://ai.umn.edu">AI Hub at ai.umn.edu</a>.
+      </p>
+      <p>
+        LoonAI is developed in collaboration with the
+        <a href="https://it.umn.edu">Office of Information Technology</a>,
+        <a href="https://dsai-hub.umn.edu">Data Science &amp; AI Hub</a>, and
+        academic units across the University.
+      </p>
+    </div>
+
+    <div class="sidebar">
+      <!-- News -->
+      <div class="s-box">
+        <div class="s-head">Latest News</div>
+        <div class="s-body">
+          <div class="news-list">
+            <div class="news-item">
+              <div class="news-date">Mar 2026</div>
+              <div class="news-title"><a href="https://twin-cities.umn.edu/news-events/university-minnesota-launches-ai-hub-drive-statewide-innovation-education-and-public">UMN launches AI Hub for statewide innovation</a></div>
+            </div>
+            <div class="news-item">
+              <div class="news-date">2026</div>
+              <div class="news-title"><a href="https://dsai-hub.umn.edu/">WiADS 2026 Conference hosted by UMN AI Hub</a></div>
+            </div>
+            <div class="news-item">
+              <div class="news-date">2025</div>
+              <div class="news-title"><a href="https://loonai.umn.edu/docs">LoonAI Gateway documentation launched</a></div>
+            </div>
+            <div class="news-item">
+              <div class="news-date">Aug 2025</div>
+              <div class="news-title"><a href="https://loonai.umn.edu">LoonAI platform opens to all UMN users</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick links -->
+      <div class="s-box">
+        <div class="s-head gold">Resources</div>
+        <div class="s-body">
+          <div class="quick-links">
+            <a href="https://loonai.umn.edu/docs" class="ql"><div class="ql-l"><span class="ql-icon">📖</span>Documentation</div><span class="ql-arr">→</span></a>
+            <a href="https://ai.umn.edu" class="ql"><div class="ql-l"><span class="ql-icon">🌐</span>AI Hub (ai.umn.edu)</div><span class="ql-arr">→</span></a>
+            <a href="https://dsai-hub.umn.edu" class="ql"><div class="ql-l"><span class="ql-icon">📊</span>Data Science & AI Hub</div><span class="ql-arr">→</span></a>
+            <a href="https://it.umn.edu" class="ql"><div class="ql-l"><span class="ql-icon">💻</span>UMN Office of IT</div><span class="ql-arr">→</span></a>
+            <a href="https://policy.umn.edu" class="ql"><div class="ql-l"><span class="ql-icon">⚖️</span>AI Policies & Governance</div><span class="ql-arr">→</span></a>
+            <a href="mailto:loonai@umn.edu" class="ql"><div class="ql-l"><span class="ql-icon">✉️</span>Contact LoonAI Team</div><span class="ql-arr">→</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA BANNER -->
+  <div class="cta-banner">
+    <div class="cta-text">
+      <h2>Get started with LoonAI today.</h2>
+      <p>All University of Minnesota students, faculty, and staff have access to LoonAI tools using their UMN Internet ID. Log in with your University credentials to get started.</p>
+    </div>
+    <div class="cta-btns">
+      <a href="https://loonai.umn.edu/login" class="btn btn-maroon">Sign in with UMN ID</a>
+      <a href="https://loonai.umn.edu/docs" class="btn btn-outline">View Documentation</a>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="f-brand">
+      <div class="f-brand-name">LoonAI</div>
+      <p>University of Minnesota-administered AI tools for research, teaching, learning, and administration.</p>
+      <div class="f-brand-sub">University of Minnesota · Twin Cities</div>
+    </div>
+    <div class="f-col">
+      <h4>Platform</h4>
+      <ul>
+        <li><a href="#gateway">LoonAI Gateway</a></li>
+        <li><a href="#tools">Available Tools</a></li>
+        <li><a href="https://loonai.umn.edu/docs">Documentation</a></li>
+        <li><a href="https://loonai.umn.edu/api">API Access</a></li>
+      </ul>
+    </div>
+    <div class="f-col">
+      <h4>University</h4>
+      <ul>
+        <li><a href="https://ai.umn.edu">AI Hub</a></li>
+        <li><a href="https://dsai-hub.umn.edu">DSAI Hub</a></li>
+        <li><a href="https://it.umn.edu">Office of IT</a></li>
+        <li><a href="https://www.umn.edu">umn.edu</a></li>
+      </ul>
+    </div>
+    <div class="f-col">
+      <h4>Support</h4>
+      <ul>
+        <li><a href="mailto:loonai@umn.edu">Contact Us</a></li>
+        <li><a href="https://it.umn.edu/help">Help Desk</a></li>
+        <li><a href="https://policy.umn.edu">AI Policy</a></li>
+        <li><a href="https://privacy.umn.edu">Privacy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 Regents of the University of Minnesota · loonai.umn.edu</p>
+    <p><a href="https://www.umn.edu/privacy">Privacy</a> &nbsp;·&nbsp; <a href="https://www.umn.edu/accessibility">Accessibility</a> &nbsp;·&nbsp; <a href="https://policy.umn.edu">Policy</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
